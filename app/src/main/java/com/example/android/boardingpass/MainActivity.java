@@ -16,15 +16,68 @@ package com.example.android.boardingpass;
 * limitations under the License.
 */
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.android.boardingpass.databinding.ActivityMainBinding;
+import com.example.android.boardingpass.utilities.FakeDataUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 public class MainActivity extends AppCompatActivity {
+
+    ActivityMainBinding mBinding,
+            mBinding1, mBinding2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+
+         /*
+         * DataBindUtil.setContentView replaces our normal call of setContent view.
+         * DataBindingUtil also created our ActivityMainBinding that we will eventually use to
+         * display all of our data.
+         */
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        BoardingPassInfo fakeBoardingInfo = FakeDataUtils.generateFakeBoardingPassInfo();
+
+        displayBoardingPassInfo(fakeBoardingInfo);
     }
 
+
+    private void displayBoardingPassInfo(BoardingPassInfo info) {
+
+        mBinding.passengerName.setText(info.passengerName);
+        mBinding.flightInfo.originCode.setText(info.originCode);
+        mBinding.flightInfo.flightCode.setText(info.flightCode);
+        mBinding.flightInfo.destCode.setText(info.destCode);
+
+        SimpleDateFormat formatter = new SimpleDateFormat(getString(R.string.timeFormat), Locale.getDefault());
+        String boardingTime = formatter.format(info.boardingTime);
+        String departureTime = formatter.format(info.departureTime);
+        String arrivalTime = formatter.format(info.arrivalTime);
+
+        mBinding.boardingTime.setText(boardingTime);
+        mBinding.departureTime.setText(departureTime);
+        mBinding.arrivalTime.setText(arrivalTime);
+
+        long totalMinutesUntilBoarding = info.getMinutesUntilBoarding();
+        long hoursUntilBoarding = TimeUnit.MINUTES.toHours(totalMinutesUntilBoarding);
+        long minutesLessHoursUntilBoarding =
+                totalMinutesUntilBoarding - TimeUnit.HOURS.toMinutes(hoursUntilBoarding);
+
+        String hoursAndMinutesUntilBoarding = getString(R.string.countDownFormat,
+                hoursUntilBoarding,
+                minutesLessHoursUntilBoarding);
+
+        mBinding.boardingInTime.setText(hoursAndMinutesUntilBoarding);
+        mBinding.boardingInfo.terminal.setText(info.departureTerminal);
+        mBinding.boardingInfo.viewGate.setText(info.departureGate);
+        mBinding.boardingInfo.viewSeat.setText(info.seatNumber);
+    }
 }

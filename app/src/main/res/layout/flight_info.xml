@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/originCodeBox"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+        <ImageView
+            android:id="@+id/destCodeBox"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@+id/destCodeBox"
+            app:layout_constraintEnd_toStartOf="@+id/destCodeBox"
+            app:layout_constraintStart_toEndOf="@+id/originCodeBox"
+            app:layout_constraintTop_toBottomOf="@+id/destCodeBox"
+            app:srcCompat="@android:drawable/bottom_bar" />
+
+        <TextView
+            android:id="@+id/destCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintBottom_toBottomOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="@+id/destCodeBox"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/destCodeBox"
+            app:layout_constraintTop_toTopOf="@+id/divider"
+            tools:text="@string/destination_code" />
+
+        <TextView
+            android:id="@+id/originCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintBottom_toBottomOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="@+id/originCodeBox"
+            app:layout_constraintStart_toStartOf="@+id/originCodeBox"
+            app:layout_constraintTop_toTopOf="@+id/divider"
+            tools:text="@string/origin_code" />
+
+        <ImageView
+            android:id="@+id/imagePlane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/plane"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintLeft_toRightOf="@+id/originCodeBox"
+            app:layout_constraintRight_toLeftOf="@+id/destCodeBox" />
+
+        <TextView
+            android:id="@+id/flightCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintLeft_toRightOf="@+id/originCodeBox"
+            app:layout_constraintRight_toLeftOf="@+id/destCodeBox"
+            app:layout_constraintTop_toTopOf="@+id/divider"
+            tools:text="@string/flight_code" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
